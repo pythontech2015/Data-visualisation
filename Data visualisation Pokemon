@@ -32,3 +32,29 @@ axes.bar(data,user,bottom=random,width=0.5)
 plt.legend(labels=[name_random,name_user])
 plt.show()
 
+if power_user > power:
+    print(name_user+' won'+' '+str(power_user)+' vs '+name_random+' '+str(power))
+elif power_user==power:
+    print('Its a tie')
+else:
+    print(name_random+' won'+' '+str(power)+' vs '+name_user+' '+str(power_user))
+
+
+#question 2, details on pie chart
+t=input('Please enter pokemon name ')
+pokemon_name=df.groupby('Name')
+name_user=pokemon_name.get_group(t)['Name'].sum()
+speed_user=pokemon_name.get_group(t)['Speed'].sum()
+defense_user=pokemon_name.get_group(t)['Defense'].sum()
+power_user=pokemon_name.get_group(t)['Total'].sum()
+special_attack_user=pokemon_name.get_group(t)['Sp. Atk'].sum()
+special_defense_user=pokemon_name.get_group(t)['Sp. Def'].sum()
+
+x=[speed_user,defense_user,power_user,special_attack_user,special_defense_user]
+fig=plt.figure()
+axes=fig.add_axes([0,0,1,1])
+axes.axis('equal')
+label=['Speed','Defense','Total Power','Special_attack','Special_defense']
+axes.pie(x,shadow=True,autopct='%.2f%%',labels=label,explode=[0.0,0.0,0.1,0.0,0.0,0.0])
+plt.legend()
+plt.show()
