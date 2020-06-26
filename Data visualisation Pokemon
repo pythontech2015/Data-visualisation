@@ -1,0 +1,34 @@
+#pokemon comparison-Data Visualization
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+
+df=pd.read_csv('D:/python/Practice/194bcff35001e7eb53a2a8b441e8b2c6-92200bc0a673d5ce2110aaad4544ed6c4010f687/pokemon.csv')
+
+#question 1
+
+random_pokemon=np.random.choice(range(1,800)) #or np.random.randint(1,800)
+pokemon_id=df.groupby('#')
+name_random=pokemon_id.get_group(random_pokemon)['Name'].sum()
+speed=pokemon_id.get_group(random_pokemon)['Speed'].sum()
+defense=pokemon_id.get_group(random_pokemon)['Defense'].sum()
+power=pokemon_id.get_group(random_pokemon)['Total'].sum()
+
+t=input('Please enter pokemon name ')
+pokemon_name=df.groupby('Name')
+name_user=pokemon_name.get_group(t)['Name'].sum()
+speed_user=pokemon_name.get_group(t)['Speed'].sum()
+defense_user=pokemon_name.get_group(t)['Defense'].sum()
+power_user=pokemon_name.get_group(t)['Total'].sum()
+
+#comparison
+random=[speed,defense,power]
+user=[speed_user,defense_user,power_user]
+data=['Speed','Defense','Power']
+fig=plt.figure()
+axes=fig.add_axes([0,0,1,1])
+axes.bar(data,random,width=0.5)
+axes.bar(data,user,bottom=random,width=0.5)
+plt.legend(labels=[name_random,name_user])
+plt.show()
+
